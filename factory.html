@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>FACTORY / CONSTRU</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css"> -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <!-- <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script> -->
+</head>
+
+<body>
+
+    <div class="container">
+        <br>
+
+        <br>
+        <div class="alert alert-success">
+            <strong>FACTORY / CONSTRU</strong>
+        </div>
+
+    </div>
+
+    <script>
+
+        function circle(radius) {
+            return {
+                radius,
+                draw() {
+                    console.log(`circled drawing using fact with radius is  ${radius}`)
+                }
+            }
+        }
+
+        // 
+
+        function circleConst(radius) {
+            this.radius = radius;
+            this.draw = function () {
+                console.log(`circled drawing using cosnt  with radius is  ${this.radius}`)
+            };
+        }
+
+
+        const cr2 = new circleConst(3);
+
+
+        class person {
+            talk() {
+                console.log("talking")
+            }
+        }
+
+        class superhuman extends person {
+            fly() {
+                console.log("flying")
+            }
+        }
+
+        const ben = new person();
+        const qoli = new superhuman();
+
+        qoli.talk()
+        qoli.fly()
+        qoli.age()
+
+        console.log(ben)
+
+        ben.age = 55;
+
+    </script>
+
+</body>
+
+</html>

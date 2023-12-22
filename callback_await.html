@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>Async Await</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+</head>
+
+<body>
+
+    <div class="container">
+        <div class="alert alert-success">
+            <strong>Success!</strong> TUTORIAL for Callbacks using ASYNC AWAIT
+        </div>
+
+        <hr>
+    </div>
+
+    <script>
+        function register() {
+
+            return new Promise((resolve, reject) => {
+                setTimeout(function () {
+                    resolve("maydata")
+                    console.log("register end -----> step 1")
+                }, 3000);
+            });
+
+        }
+
+        function sendEmail() {
+            return new Promise((resolve, reject) => {
+                setTimeout(function () {
+                    resolve("maydata")
+                    console.log("sendEmail end -----> step 2")
+                }, 2000);
+
+            });
+
+        }
+
+        function login() {
+            return new Promise((resolve, reject) => {
+                setTimeout(function () {
+                    resolve("maydata")
+                    console.log("login end -----> step 3")
+                }, 2000);
+            });
+
+        }
+
+        function getUserdata() {
+            return new Promise((resolve, reject) => {
+                setTimeout(function () {
+                    resolve("maydata")
+                    console.log("getUserdata end -----> step 4")
+                }, 2000);
+            });
+
+        }
+
+        function displayData() {
+            return new Promise((resolve, reject) => {
+                setTimeout(function () {
+                    resolve("maydata")
+                    console.log("displayData end -----> step 5")
+                }, 2000);
+            });
+        }
+
+        function otherWorks() {
+            console.log("otherWorks start")
+        }
+
+        async function myclick() {
+            await register();
+            await sendEmail();
+            await login();
+            await getUserdata();
+            await displayData();
+        };
+
+        // myclick().then(function () {
+        //     console.log("all process completed ")
+        // }).finally(() => {
+        //     console.log("END")
+        // });
+
+
+
+
+
+
+
+        let a = 10;
+        let b = 6;
+        const first = () => {
+            return new Promise((resolve, reject) => {
+                resolve(a + b)
+            });
+        }
+
+        const sec = () => {
+            return new Promise((resolve, reject) => {
+                setTimeout(() => {
+                    resolve(b - a)
+                }, 1000);
+
+            });
+        }
+
+        const third = () => {
+            return new Promise((resolve, reject) => {
+                resolve(a * b)
+            });
+        }
+
+        const fourth = () => {
+            return new Promise((resolve, reject) => {
+                resolve(a / b)
+            });
+        }
+
+
+        async function calcualte() {
+            let data_from_first = await first();
+            console.log(`${data_from_first}`);
+
+            let data_from_sec = await sec();
+            console.log(`${data_from_sec}`);
+
+            let data_from_third = await third();
+            console.log(`${data_from_third}`);
+
+            let data_from_fourth = await fourth();
+            console.log(`${data_from_fourth}`);
+            return new Promise((res, rej) => {
+                res("my last ")
+            });;
+        }
+
+        
+        calcualte().then((res) => {
+            console.log(res)
+        })
+
+        function register(){
+            calcualte()
+        }
+
+
+        // register(() => {
+        //     sendEmail(() => {
+        //         login(() => {
+        //             getUserdata(() => {
+        //                 displayData();
+        //             });
+        //         });
+        //     })
+        // });
+
+        otherWorks();
+    </script>
+
+</body>
+
+</html>

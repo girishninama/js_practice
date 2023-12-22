@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Skeleton Loader Example</title>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/skeleton/2.0.4/skeleton.min.css">
+    </head>
+    <body>
+
+        <style>
+            * {
+                box-sizing: border-box;
+            }
+
+            body {
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                /*background: #777;*/
+                height: 100%;
+            }
+
+            .cards {
+                display: flex;
+                gap: 10px;
+            }
+
+            .card {
+                width: 300px;
+                background: #fff;
+                border-radius: .5rem;
+                box-shadow: 0 0 4px rgba(0, 0, 0, .19);
+            }
+
+            .card-img img {
+                width: 100%;
+                border-radius: .5rem .5rem 0 0;
+            }
+
+            .card-content {
+                padding: 10px 25px;
+            }
+
+            .card-skeleton .card-img {
+                height: 200px;
+                border-radius: .5rem .5rem 0 0;
+                background: #f1f1f1;
+                background: linear-gradient(110deg, #f1f1f1 8%, #fff 18%, #f1f1f1 33%);
+                background-size: 200% 100%;
+                animation: 2.5s skeleton linear infinite;
+            }
+
+            .card-skeleton .card-content * {
+                height: 20px;
+                background: #f1f1f1;
+                background: linear-gradient(110deg, #f1f1f1 8%, #fff 18%, #f1f1f1 33%);
+                background-size: 200% 100%;
+                animation: 2.5s skeleton linear infinite;
+            }
+
+            @keyframes skeleton {
+                to {
+                    background-position-x: -200%;
+                }
+            }
+
+        </style>
+
+
+        <!-- Skeleton loader example -->
+        <div class="container">
+            <div class="row">
+                <div class='cards'>
+                    <div class='card'>
+                        <div class='card-img'>
+                            <img src="https://images.unsplash.com/photo-1612195325560-9d241f1e25cc" alt="img" />
+                        </div>
+                        <div class='card-content'>
+                            <h2>TITLE HERE</h2>
+                            <p>CONTENT HERE</p>
+                        </div>
+                    </div>
+
+                    <div class='card card-skeleton'>
+                        <div class='card-img'>
+                            <img src="https://images.unsplash.com/photo-1612195325560-9d241f1e25cc" alt="img" />
+                        </div>
+                        <div class='card-content'>
+                            <h2></h2>
+                            <p></p>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+
+            <style>
+                .main1{
+                    width: 100%;
+                    height: 200px;
+                    background-color: red ;
+
+                }
+                .main2{
+                    width: 60px;
+                    height: 50%;
+                    background-color: green ;
+                    float: left;
+                }
+                .main3{
+                    float: right;
+                    width: calc(100% - 90px);
+                    height: calc(200px - 50%);
+                    background-color: blue ;
+
+                }
+            </style>
+            <div class="main1">
+                <div class="main2">
+                    1
+                </div>
+                <div class="main3">
+                    2
+                </div>
+            </div>
+
+        </div>
+
+        <script>
+            // Simulate content loading delay
+            setTimeout(function () {
+                // Display the actual content and hide the skeleton loader
+                document.querySelector('.container').style.display = 'block';
+                document.querySelector('.skeleton').style.display = 'none';
+            }, 1000); // Adjust the timeout as needed
+        </script>
+
+    </body>
+</html>

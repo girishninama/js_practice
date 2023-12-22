@@ -1,0 +1,263 @@
+<!doctype html>
+<html lang="en">
+
+    <head>
+        <!-- Required meta tags -->
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <!-- Bootstrap CSS -->
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+              integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+
+        <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+
+        <title>DEMO JS</title>
+    </head>
+
+    <style>
+
+    </style>
+
+    <body>
+
+        <div class="container">
+            <div class="alert alert-success mt-3" role="alert">
+                DEMO JS
+            </div>
+
+            <form id="myform">
+                <input type="file" name="u_image" id="u_image">
+            </form>
+
+            <div>
+                <label for="bar" class="bar">Progress</label>
+                <progress id="bar" value="0" max="100"></progress>
+            </div>
+
+        </div>
+
+
+
+
+    </body>
+
+
+    <script>
+
+
+        function call1() {
+
+            let res = new Promise((resolve, reject) => {
+
+                setTimeout(() => {
+                    console.log("called call 1")
+                    resolve({sub1: 10})
+                }, 1000);
+            });
+            return res;
+
+        }
+
+        function call2() {
+
+            let res = new Promise((resolve, reject) => {
+
+                setTimeout(() => {
+                    console.log("called call 2")
+                    resolve({sub2: 50})
+                }, 1000);
+            });
+            return res;
+        }
+
+        function call3() {
+
+            let res = new Promise((resolve, reject) => {
+
+                setTimeout(() => {
+                    console.log("called call 3")
+                    resolve({sub3: 20})
+                }, 5000);
+            });
+            return res;
+        }
+
+        async function allProcess() {
+            // let cal1_res = await call1()
+            // let cal2_res = await call2()
+            // let cal3_res = await call3()
+            // console.log(cal1_res.sub1 + cal2_res.sub2 + cal3_res.sub3)
+        }
+
+        function importantAction(ele, cb) {
+            setTimeout(() => {
+                cb(`${ele}`)
+            }, 500);
+        }
+
+        function likeVideo(ele, cb) {
+            setTimeout(() => {
+                cb(`${ele}`)
+            }, 1500);
+        }
+
+        function shareVideo(ele, cb) {
+            setTimeout(() => {
+                cb(`${ele}`)
+            }, 1000);
+        }
+
+        function finalAction() {
+            console.log("finalAction")
+        }
+
+        // importantAction("importantAction", (res) => {
+        //     console.log(res)
+
+        //     likeVideo("likeVideo", (res) => {
+        //         console.log(res)
+
+        //         shareVideo("shareVideo", (res) => {
+        //             console.log(res)
+        //             finalAction()
+        //         })
+
+        //     })
+
+        // })
+
+        let config = {
+            'Access-Control-Allow-Origin': '*',
+            onUploadProgress: (progressEvent) => {
+                const completed = (progressEvent.loaded / progressEvent.total) * 100;
+                console.log(completed)
+
+                let barPercentage = document.getElementById("bar");
+                barPercentage.setAttribute("value", completed)
+                $(".bar").text(`Progress ${completed}%`)
+
+            }
+        }
+
+
+        function girish() {
+            let u_image = document.getElementById("u_image");
+            let formDetail = new FormData();
+
+            formDetail.append("image", u_image.files[0])
+
+            // axios.post('https://httpbin.org/post', formDetail, config)
+            // axios.post('https://127.0.0.1:5500/fileupload', formDetail, config)
+            axios.post('https://oteq.in/mtelpro/uploadsheet/test', formDetail, config)
+                    .then(function (response) {
+                        console.log(response);
+                    })
+                    .catch(function (error) {
+                        console.log(error);
+                    });
+        }
+
+        // girish()
+
+        function a(cb) {
+            let a = 1;
+            cb(a)
+        }
+        function b(a, cb) {
+            let b = 2;
+
+            cb(a + b)
+
+        }
+        function c(res, cb) {
+            let c = 1;
+
+            cb(res + c)
+
+        }
+
+        a((res) => {
+            b(res, (res) => {
+                c(res, (res) => {
+                    console.log(`my result is final answer is => ${res}`)
+                })
+            })
+        });
+
+
+        function promisedemo() {
+            return new Promise((res, rej) => {
+                setTimeout(() => {
+                    console.log("-----")
+                    res()
+
+                }, 1000);
+            });
+        }
+
+        function dothis() {
+
+            return new Promise((res, rej) => {
+                setTimeout(() => {
+                    console.log("dothis")
+                    res()
+
+                }, 1000);
+            });
+
+
+        }
+
+        function thirdfunc() {
+            console.log("thirdfunc")
+        }
+
+        const oncomplete = promisedemo();
+        const oncompletethat = dothis();
+
+        oncomplete.then(dothis).then(thirdfunc)
+
+
+
+    //     let arr = [ 100, 500, 300, 200, 400  , 100 ] ;
+
+    // let c = arr.reduce((a,b)=>{
+    //     console.log(a , b )    
+    //     return a + b ;
+    // } ,  1 );
+
+    // console.log(c)
+
+    // let a = [ 100, 500, 300, 200, 400  , 100 ] ;
+
+
+    // let b = a.filter(mycustom);
+
+    // function mycustom(a){
+
+    //     return a < 5;
+    // }
+
+    // let a = [ 100, 500, 300, 200, 400  , 100 ] ;
+
+    // console.log(a)
+    // a.forEach((ele , i )=>{
+    //     console.log(ele + 1  , i )
+    // });
+
+    // let a  = new Set() ;
+    // a.add("mykey" , "val")
+
+    // console.log(a) 
+
+
+
+
+
+    </script>
+
+
+
+</html>

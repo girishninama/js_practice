@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title>Callbacks</title>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+    </head>
+    <body>
+
+        <div class="container">
+            <div class="alert alert-success">
+                <strong>Success!</strong> TUTORIAL for Callbacks using HIGHER ORDER FUNCTION
+            </div>
+
+            <hr>
+        </div>
+
+        <script>
+            function register(cb) {
+                setTimeout(function () {
+                    console.log("register end -----> step 1")
+                    cb()
+                }, 1000);
+            }
+
+            function sendEmail(cb) {
+                setTimeout(function () {
+                    console.log("sendEmail end -----> step 2")
+                    cb()
+                }, 5000);
+            }
+
+            function login(cb) {
+                setTimeout(function () {
+                    console.log("login end -----> step 3")
+                    cb()
+                }, 1000);
+            }
+
+            function getUserdata(cb) {
+                setTimeout(function () {
+                    console.log("getUserdata end -----> step 4")
+                    cb()
+                }, 1000);
+            }
+
+            function displayData() {
+                setTimeout(function () {
+                    console.log("displayData end -----> step 5")
+                }, 1000);
+            }
+
+            function otherWorks() {
+                console.log("otherWorks start")
+            }
+
+            
+            
+            register(() => {
+                sendEmail(() => {
+                    login(() => {
+                        getUserdata(() => {
+                            displayData();
+                        });
+                    });
+                })
+            });
+            otherWorks();
+        </script>
+
+    </body>
+</html>
+
+<!--select
+a.* ,
+b.date_time  , 
+(
+        select 
+        case when count(*) = 0 then 1 else count(*) + 1 end
+        from tbl_hcv_info a 
+        where a.hr_id = 153
+        and b.date_time < a.date_time and date(b.date_time) = date(a.date_time)
+) as rn
+
+from (
+    select a.hi_id , a.hr_id , date(a.date_time) as date , x.driver_name
+        from tbl_hcv_info a
+    left join tbl_hcv_reg x on x.hr_id = a.hr_id
+    where a.hr_id = 153
+    group by date(a.date_time)
+     ) a
+left join tbl_hcv_info b on  date(b.date_time) = date(a.date) 
+and b.hr_id = 153
+order by b.date_time desc
+-->
+

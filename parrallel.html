@@ -1,0 +1,310 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>PARRALEL REQUEST</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+</head>
+
+<body>
+
+    <div class="container">
+        <div class="alert alert-success">
+            <strong>Success!</strong> TUTORIAL for PARRALEL REQUEST Callbacks
+        </div>
+
+        <hr>
+    </div>
+
+    <script>
+        function register() {
+
+            return new Promise((resolve, reject) => {
+                setTimeout(function () {
+                    resolve("maydata")
+                    console.log("register end -----> step 1")
+                }, 3000);
+            });
+
+        }
+
+        function sendEmail() {
+            return new Promise((resolve, reject) => {
+                setTimeout(function () {
+                    resolve("maydata")
+                    console.log("sendEmail end -----> step 2")
+                }, 2000);
+
+            });
+
+        }
+
+        function login() {
+            return new Promise((resolve, reject) => {
+                setTimeout(function () {
+                    resolve("maydata")
+                    console.log("login end -----> step 3")
+                }, 2000);
+            });
+
+        }
+
+        function getUserdata() {
+            return new Promise((resolve, reject) => {
+                setTimeout(function () {
+                    resolve("maydata")
+                    console.log("getUserdata end -----> step 4")
+                }, 2000);
+            });
+
+        }
+
+        function displayData() {
+            return new Promise((resolve, reject) => {
+                setTimeout(function () {
+                    resolve("maydata")
+                    console.log("displayData end -----> step 5")
+                }, 2000);
+            });
+        }
+
+        function otherWorks() {
+            console.log("otherWorks start")
+        }
+
+        async function myclick() {
+            await register();
+            await sendEmail();
+            await login();
+            await getUserdata();
+            await displayData();
+        };
+
+        // myclick().then(function () {
+        //     console.log("all process completed ")
+        // }).finally(() => {
+        //     console.log("END")
+        // });
+
+
+
+
+
+
+
+        let a = 10;
+        let b = 6;
+        const first = () => {
+            // return new Promise((resolve, reject) => {
+
+            let res = $.ajax({
+                url: "https://jsonplaceholder.typicode.com/photos",
+                success: function (result) {
+                    console.log("first end -----> step 1")
+                    // resolve(result)
+                },
+                error: function (jqXHR, textStatus, errorThrown) {
+                    // reject(errorThrown)
+                }
+            });
+
+            return res;
+
+
+            // });
+        }
+
+        const sec = () => {
+            // return new Promise((resolve, reject) => {
+            // let res =     setTimeout(() => {
+            let res = $.ajax({
+                url: "https://jsonplaceholder.typicode.com/users",
+                success: function (result) {
+                    console.log("sec end -----> step 1")
+                    // resolve(result)
+                },
+                error: function (jqXHR, textStatus, errorThrown) {
+                    // reject(errorThrown)
+                }
+            });
+            // }, 1000);
+
+            return res;
+
+            // });
+        }
+
+        const third = () => {
+            // return new Promise((resolve, reject) => {
+
+            let res = $.ajax({
+                url: "https://jsonplaceholder.typicode.com/comments",
+                success: function (result) {
+                    console.log("third end -----> step 1")
+                    // resolve(result)
+                },
+                error: function (jqXHR, textStatus, errorThrown) {
+                    // reject(errorThrown)
+                }
+            });
+            return res;
+            // });
+        }
+
+        const fourth = () => {
+            // return new Promise((resolve, reject) => {
+            let res = $.ajax({
+                url: "https://jsonplaceholder.typicode.com/todos",
+                // dataType :  "JSON",
+                success: function (result) {
+                    console.log("four end -----> step 1")
+                    // resolve(result)
+
+                },
+                error: function (jqXHR, textStatus, errorThrown) {
+                    // reject(errorThrown)
+                }
+            });
+
+            return res;
+
+            // });
+        }
+
+
+        async function calcualte() {
+            // let data_from_first = await first();
+            // console.log(`${data_from_first}`);
+            // let data_from_sec = await sec();
+            // console.log(`${data_from_sec}`);
+            // let data_from_third = await third();
+            // console.log(`${data_from_third}`);
+            // let data_from_fourth = await fourth();
+            // console.log(`${data_from_fourth}`);
+
+            let data_from_first = first();
+            let data_from_sec = sec();
+            let data_from_third = third();
+            let data_from_fourth = fourth();
+
+
+
+            console.log(data_from_first)
+            console.log(data_from_sec)
+            console.log(data_from_third)
+            console.log(data_from_fourth)
+
+            return Promise.all([
+                data_from_first,
+                data_from_sec,
+                data_from_third,
+                []
+            ]);
+        }
+
+        // let final = calcualte().then((res)=>{
+        //     console.log("final result ",res)
+        // })
+
+
+        function test() {
+
+            // let res = $.ajax({
+            //     url: "https://jsonplaceholder.typicode.com/posts",
+            //     dataType :  "JSON",
+            //     success: function (result) {
+            //         console.log("Post end -----> step 1")
+            //     },
+            //     error: function (jqXHR, textStatus, errorThrown) {
+            //     }
+            // });
+
+            return new Promise((resolve, reject) => {
+                let res2 = $.ajax({
+                    url: "https://jsonplaceholder.typicode.com/photos",
+                    dataType: "JSON",
+                    success: function (result) {
+                        console.log("Photo end -----> step 1")
+                        resolve(result)
+                    },
+                    error: function (jqXHR, textStatus, errorThrown) {
+                    }
+                });
+            });
+
+
+            // let res3 =$.ajax({
+            //     url: "https://jsonplaceholder.typicode.com/todos",
+            //     dataType :  "JSON",
+            //     success: function (result) {
+            //         console.log("to Dos end -----> step 1")
+            //     },
+            //     error: function (jqXHR, textStatus, errorThrown) {
+            //     }
+            // });
+
+            // let res4 = $.ajax({
+            //     url: "https://jsonplaceholder.typicode.com/users",
+            //     dataType :  "JSON",
+            //     success: function (result) {
+            //         console.log("users end -----> step 1" , result)
+            //     },
+            //     error: function (jqXHR, textStatus, errorThrown) {
+            //     }
+            // });
+
+            // let res5 =$.ajax({
+            //     url: "https://jsonplaceholder.typicode.com/comments",
+            //     dataType :  "JSON",
+            //     success: function (result) {
+            //         console.log("comments end -----> step 1" , result)
+            //     },
+            //     error: function (jqXHR, textStatus, errorThrown) {
+            //     }
+            // });
+
+
+
+        }
+
+        test().then((res) => {
+            console.log("res", res)
+            let photohtml = '';
+            let index  = 1 
+            res.map(function (ele,i) {
+                photohtml = '';
+                console.log(ele.thumbnailUrl)
+                photohtml += '<div class="col-md-2"> '+index+' <img src="' + ele.thumbnailUrl + '" class="img-thumbnail" alt="Cinque Terre"></div>';
+                $(".dynamic").append(photohtml)
+                index++;
+            });
+
+        });
+
+
+
+        // register(() => {
+        //     sendEmail(() => {
+        //         login(() => {
+        //             getUserdata(() => {
+        //                 displayData();
+        //             });
+        //         });
+        //     })
+        // });
+
+        otherWorks();
+    </script>
+
+    <div class="row dynamic">
+        
+    </div>
+
+
+</body>
+
+</html>

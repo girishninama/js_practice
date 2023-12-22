@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>Callbacks</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+</head>
+
+<body>
+
+    <div class="container">
+        <div class="alert alert-success">
+            <strong>Success!</strong> TUTORIAL for Callbacks using HIGHER ORDER FUNCTION
+        </div>
+
+        <hr>
+    </div>
+
+    <script>
+
+
+        function one(cb) {
+            console.log("1")
+            cb()
+        }
+        function two(cb) {
+            console.log("2")
+            cb()
+        }
+        function three(cb) {
+            console.log("3")
+            cb()
+        }
+        function four() {
+            console.log("4")
+        }
+
+
+        one(function () {
+            two(function () {
+                three(()=>{
+                    four()
+                })
+            })
+        })
+
+
+
+    </script>
+
+</body>
+
+</html>
+
+<!--select
+a.* ,
+b.date_time  , 
+(
+        select 
+        case when count(*) = 0 then 1 else count(*) + 1 end
+        from tbl_hcv_info a 
+        where a.hr_id = 153
+        and b.date_time < a.date_time and date(b.date_time) = date(a.date_time)
+) as rn
+
+from (
+    select a.hi_id , a.hr_id , date(a.date_time) as date , x.driver_name
+        from tbl_hcv_info a
+    left join tbl_hcv_reg x on x.hr_id = a.hr_id
+    where a.hr_id = 153
+    group by date(a.date_time)
+     ) a
+left join tbl_hcv_info b on  date(b.date_time) = date(a.date) 
+and b.hr_id = 153
+order by b.date_time desc
+-->

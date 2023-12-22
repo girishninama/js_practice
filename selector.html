@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>Selector</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+
+</head>
+
+<body>
+
+    <div class="container">
+        <div class="alert alert-success">
+            <strong>Selector</strong>
+        </div>
+
+        <span id="girish">Selector</span>
+
+        <hr>
+
+        <button type="button" id="add" class="20 formgroup a b c  d e" name=""> ADD</button>
+        <button type="button" id="delete" name="">DELETE</button>
+
+        <div id="foo"></div>
+
+        <hr>
+
+        <button type="button" id="plus"> COUNTER PLUS</button>
+        <button type="button" id="minus"> COUNTER MINUS</button>
+
+        <div id="currnetcounter">0</div>
+
+    </div>
+
+    <script>
+
+        let addbtn = document.querySelector("#add")
+        let deletebtn = document.querySelector("#delete")
+
+        let plus = document.querySelector("#plus")
+        let minus = document.querySelector("#minus")
+
+        addbtn.addEventListener("click", addblock);
+        deletebtn.addEventListener("click", removeblock);
+
+
+        function makeFunc() {
+            let name = 0;
+            function displayName() {
+                // console.log(name++);
+                return name++;
+            }
+            return displayName;
+        }
+
+        const myFunc3 = makeFunc();
+
+        function addblock() {
+            let idx = myFunc3();
+            $("#foo").prepend(`<h2>------${idx}------</h2>`)
+        }
+
+        function removeblock() {
+            let h2 = document.querySelector("h2")
+            h2.remove();
+        }
+
+
+        //---------------------------- PRIVATE COUNTER VALUE 
+
+
+        const counter = () => {
+
+            let privatecounter = 0;
+
+            function change(val) {
+                let p = privatecounter += val
+                console.log(document.getElementById("currnetcounter"));
+                return p;
+            }
+
+            return {
+
+                increment() {
+                    change(1);
+                },
+                decrement() {
+                    change(-1);
+                },
+                value() {
+
+                    return privatecounter;
+                }
+            }
+        };
+
+        let a = counter();
+
+        plus.addEventListener("click", add)
+        minus.addEventListener("click", min)
+
+        function add() {
+            a.increment()
+            $("#currnetcounter").html(a.value())
+        }
+
+        function min() {
+            a.decrement()
+            $("#currnetcounter").html(a.value())
+        }
+
+    </script>
+
+</body>
+
+</html>
+

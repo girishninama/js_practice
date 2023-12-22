@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>Closures</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css"> -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <!-- <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script> -->
+</head>
+
+<body>
+
+    <div class="container">
+        <div class="alert alert-success">
+            <strong>Success!</strong> Closures
+        </div>
+
+        <hr>
+    </div>
+
+    <script>
+
+        function find() {
+            var a = [];
+
+            for (let i = 0; i < 50; i++) {
+                a[i] = i * i;
+            }
+
+            return function (index) {
+                console.log(a[index])
+            }
+        }
+
+        const closurevar = find();
+        console.time("closure")
+        closurevar(25)
+        console.timeEnd("closure")
+
+
+        let f = () => {
+            let i = 1;
+            return () => {
+                console.log(i)
+            }
+        }
+
+        // console.dir(f())
+
+
+
+    </script>
+
+</body>
+
+</html>

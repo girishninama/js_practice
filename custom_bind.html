@@ -1,0 +1,80 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- Bootstrap CSS -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+
+    <title>Custom bind </title>
+</head>
+
+<body>
+    <div class="container">
+        <div class="alert alert-success mt-3" role="alert">
+            Custom bind function
+        </div>
+    </div>
+</body>
+
+<script>
+
+    let obj1 = {
+        fname: "girish",
+        lname: "ninama"
+    }
+
+    function printName(state, mobile) {
+        console.log(`%c *** ${this.fname} ${this.lname} *** 
+        he is from ${state}  -> ${mobile} 
+        `, "color :blue  ; font-size : 10px  ; ")
+    }
+
+    let printNameCopy = printName.bind(obj1, "ahmedabad", "9924156363")
+    printNameCopy()
+
+
+    Function.prototype.mybind = (...args) => {
+        let obj = this,
+            param = args.slice(1);
+        return function (...args2) {
+            obj.apply(args[0], [...param, ...args2])
+        }
+    }
+
+
+    let pname = printName.mybind(obj1, "ahmedabad")
+    pname(['9924156363'])
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</script>
+
+</html>

@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>Curry</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css"> -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <!-- <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script> -->
+</head>
+
+<body>
+
+    <div class="container">
+        <div class="alert alert-success">
+            <strong>Curry</strong>
+        </div>
+
+        <span id="girish">coder</span>
+
+
+        <hr>
+
+
+        <button type="button" name="" onclick="resize(10)"> 10 px</button>
+        <button type="button" name="" onclick="resize(20)"> 20 px</button>
+        <button type="button" name="" onclick="resize(40)"> 40 px</button>
+
+    </div>
+
+    <script>
+
+        function setSize() {
+            return function (size) {
+                $("#girish").css("font-size", `${size}px`);
+            }
+        }
+
+        const resize = setSize();
+
+
+
+
+
+
+        function sum(a) {
+            return function (b) {
+                return function (c) {
+                    return a + b + c;
+                }
+            }
+        }
+
+        const curry = sum(10);
+        console.log(curry(20)(1));
+        // console.log(sum(10)(20)(5));;
+
+
+        function updatecontent(id) {
+            return function (content) {
+                setTimeout(function () {
+                    $(`#${id}`).html(content)
+                }, 500);
+            }
+        }
+
+        const updater = updatecontent("girish");
+
+        updater("APPLICATION  DEVELOPER")
+
+
+
+        // ------------------ curr
+
+        function curried(func) {
+
+            return function curriedfunc(...args) {
+                // console.log(args, args.length, func.length)
+
+                if (args.length >= func.length) {
+                    return func(...args)
+                } else {
+                    return function (...next) {
+
+                        console.log(...args, "=>", ...next)
+
+                        return curriedfunc(...args, ...next);
+                    }
+                }
+
+
+            }
+
+        }
+
+        const sums = (a, b, c, d) => a + b + c + d;
+
+
+        const totalsum = curried(sums);
+
+
+        console.log(totalsum(2)(3)(4)(5));
+        // console.log(totalsum(1, 1));
+
+
+
+
+
+        //
+
+
+
+
+
+
+        function subscribe(cb) {
+            setTimeout(() => {
+                console.log("subscribed")
+                cb()
+            }, 500);
+        }
+
+        function like(cb) {
+            setTimeout(() => {
+                console.log("like")
+                cb()
+            }, 00);
+        }
+
+        function share(cb) {
+            setTimeout(() => {
+                console.log("share")
+                cb()
+            }, 2000);
+        }
+
+        function comment() {
+            setTimeout(() => {
+                console.log("comment")
+            }, 0);
+        }
+
+        subscribe(function () {
+            like(()=>{
+                share(()=>{
+                    comment()
+                })
+            })
+        })
+
+
+
+
+    </script>
+
+</body>
+
+</html>

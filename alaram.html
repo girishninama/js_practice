@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Alarm Clock</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            text-align: center;
+            padding: 50px;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>Alarm Clock</h1>
+    <p id="alarmTime"></p>
+
+    <script>
+        // Function to display current time
+        function displayTime() {
+            const now = new Date();
+            const hours = now.getHours().toString().padStart(2, '0');
+            const minutes = now.getMinutes().toString().padStart(2, '0');
+            const seconds = now.getSeconds().toString().padStart(2, '0');
+            return `${hours}:${minutes}:${seconds}`;
+        }
+
+        // Set the alarm time (10 seconds from now)
+        const alarmTime = new Date();
+        alarmTime.setSeconds(alarmTime.getSeconds() + 2);
+
+        // Display the alarm time
+        document.getElementById("alarmTime").innerText = `Alarm set for: ${alarmTime.toLocaleTimeString()}`;
+
+        // Check the current time and beep when the alarm time is reached
+        function checkAlarm() {
+            const currentTime = new Date();
+            console.log(currentTime , alarmTime)
+            if (currentTime >= alarmTime) {
+                // Beep sound (you can replace this with your own sound file)
+                const beep = new Audio('./beep.mp3');
+                beep.play();
+
+                // Display a message
+                alert('Time to wake up!');
+            } else {
+                // Update the current time every second
+                document.getElementById("alarmTime").innerText = `Current time: ${displayTime()}`;
+                setTimeout(checkAlarm, 1000);
+            }
+        }
+
+        // Start checking for the alarm
+        checkAlarm();
+
+
+        function playSound() {
+                var audio = new Audio('beep.mp3');
+
+                audio.addEventListener('canplaythrough', function () {
+                    audio.play();
+                });
+
+                audio.addEventListener('error', function () {
+                    console.error('Error loading the sound file.');
+                });
+
+                // Preload the sound file
+                // audio.preload = 'auto';
+                // audio.load();
+            }
+
+            
+                function stopsound() {
+                    var audio = new Audio('beep.mp3');
+
+                    
+                    
+                    // Preload the sound file
+                    // audio.preload = 'auto';
+                    // audio.load();
+                }
+    </script>
+
+</body>
+</html>
